@@ -12,18 +12,21 @@
   border: black solid 1px;
 }
 
+/* FORM */
 .form-container {
   display: flex;
   flex-direction: column;
   width: 25%;
-  border: black solid 1px;
   color: rgb(66, 66, 66);
+  height: fit-content;
+  border-bottom: 130px solid rgb(207, 207, 207);
+  border-top: 30px solid rgb(207, 207, 207);
 }
 
 .input-container {
   display: flex;
   flex-direction: column;
-  margin: 40px 0 40px 0;
+  margin: 30px 0 30px 0;
 }
 
 .input-container > p {
@@ -36,6 +39,16 @@
   align-items: center;
 }
 
-input[type='radio'] {
+.price {
+  margin-bottom: 20px;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
   margin-right: 3px;
 }
+
+input[type='number'] {
+  margin-left: 3px;
+}
+/* FORM */
