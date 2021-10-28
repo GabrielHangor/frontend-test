@@ -1,7 +1,12 @@
 import React from 'react';
+import Flight from './Flight';
 
-function Flights() {
-  return <div className="flights-container"></div>;
+function Flights({ flightsData }) {
+  return (
+    <div className="flights-container">
+      <Flight />
+    </div>
+  );
 }
 
 export default Flights;
