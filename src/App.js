@@ -12,7 +12,12 @@ function App() {
     till: 10000,
   });
 
-  console.log(data.result.flights[0]);
+  console.log(data.result.flights[0].flight);
+  const uniqueCarriers = [
+    ...new Set(data.result.flights.map((el) => el.flight.carrier.caption)),
+  ];
+
+  console.log(uniqueCarriers);
 
   useEffect(() => {
     setFlightsData(data.result.flights);
