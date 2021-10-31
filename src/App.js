@@ -5,6 +5,7 @@ import data from './flights.json';
 
 function App() {
   const [flightsData, setFlightsData] = useState();
+  const [filteredData, setFilteredData] = useState();
   const [radioInputValue, setRadioInputValue] = useState('ascending');
   const [priceInputValue, setPriceInputValue] = useState({
     from: 0,
@@ -13,7 +14,28 @@ function App() {
   const [airlinesFilterState, setAirlinesFilterState] = useState({});
   const [transferFilterState, setTransferFilterState] = useState({});
 
-  console.log(data.result.flights[0].flight);
+  const returnSortedDataByPriceAndTime = (flights) => {
+    if (radioInputValue === 'ascending') {
+      return flights.sort((a, b) => {
+        return b.flight.price.total.amount - a.flight.price.total.amount;
+      });
+    }
+    if (radioInputValue === 'descending') {
+      return flights.sort((a, b) => {
+        return a.flight.price.total.amount - b.flight.price.total.amount;
+      });
+    }
+    if (radioInputValue === 'time') {
+      return flights.sort((a, b) => {
+        return (
+          a.legs[0].duration +
+          a.legs[1].duration -
+          (b.legs[0].duration + b.legs[1].duration)
+        );
+      });
+    }
+  };
+
   // const uniqueCarriers = [
   //   ...new Set(data.result.flights.map((el) => el.flight.carrier.caption)),
   // ];
@@ -23,6 +45,15 @@ function App() {
   useEffect(() => {
     setFlightsData(data.result.flights);
   }, []);
+
+  // console.log(data.result.flights);
+
+  useEffect(() => {
+    let tempData = null;
+    if (flightsData) tempData = returnSortedDataByPriceAndTime(flightsData);
+
+    setFilteredData(tempData);
+  }, [radioInputValue]);
 
   const handleRadioInputChange = (e) => setRadioInputValue(e.target.value);
 
@@ -60,7 +91,7 @@ function App() {
         handleTransferFilterChange={handleTransferFilterChange}
         transferFilterState={transferFilterState}
       />
-      <Flights flightsData={flightsData} />
+      <Flights flightsData={filteredData} />
     </div>
   );
 }
