@@ -3,10 +3,12 @@ import React from 'react';
 function Form({
   radioInputValue,
   handleRadioInputChange,
-  handleCheckboxInputChange,
-  checkedState,
   priceInputValue,
   handlePriceInputChange,
+  handleAirlinesFilterChange,
+  airlinesFilterState,
+  handleTransferFilterChange,
+  transferFilterState,
 }) {
   return (
     <div className="form-container">
@@ -50,7 +52,7 @@ function Form({
         </div>
       </div>
       {/* radio buttons sort */}
-      {/* checkbox filters */}
+      {/* transfer filters */}
       <div className="input-container">
         <p>Фильтровать</p>
         <div className="input-group">
@@ -58,9 +60,9 @@ function Form({
           <input
             type="checkbox"
             id="transfer"
-            value="0"
-            checked={checkedState[0]}
-            onChange={(e) => handleCheckboxInputChange(e)}
+            name="transfer"
+            onChange={(e) => handleTransferFilterChange(e)}
+            checked={transferFilterState.transfer}
           />
           <label for="transfer"> - 1 пересадка</label>
         </div>
@@ -69,14 +71,14 @@ function Form({
           <input
             type="checkbox"
             id="no_transfer"
-            value="1"
-            checked={checkedState[1]}
-            onChange={(e) => handleCheckboxInputChange(e)}
+            name="noTransfer"
+            onChange={(e) => handleTransferFilterChange(e)}
+            checked={transferFilterState.noTransfer}
           />
           <label for="no_transfer"> - без пересадок</label>
         </div>
       </div>
-      {/* checkbox filters */}
+      {/* transfer filters */}
       {/* price filters */}
       <div className="input-container">
         {' '}
@@ -112,23 +114,110 @@ function Form({
           {' '}
           <input
             type="checkbox"
-            id="polish"
-            value="2"
-            onChange={(e) => handleCheckboxInputChange(e)}
-            checked={checkedState[2]}
+            id="Air-France"
+            name="airfrance"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.airfrance}
           />
-          <label for="polish"> - LOT Polish Airlines от 21049 р.</label>
+          <label for="Air-France"> - Air France</label>
+        </div>
+        <div className="input-group">
+          <input
+            type="checkbox"
+            id="KLM"
+            name="klm"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.klm}
+          />
+          <label for="KLM"> - KLM</label>
         </div>
         <div className="input-group">
           {' '}
           <input
             type="checkbox"
-            id="aeroflot"
-            value="3"
-            onChange={(e) => handleCheckboxInputChange(e)}
-            checked={checkedState[3]}
+            id="Aeroflot"
+            name="aeroflot"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.aeroflot}
           />
-          <label for="aeroflot"> - Аэрофлот - росс.... от 31733 р.</label>
+          <label for="Aeroflot"> - Аэрофлот - росс...</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="turk"
+            name="turk"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.turk}
+          />
+          <label for="turk"> - TURK HAVA YOLLARI A.O.</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="finnair"
+            name="finnair"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.finnair}
+          />
+          <label for="finnair"> - Finnair Oyj</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="airbaltic"
+            name="airbaltic"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.airbaltic}
+          />
+          <label for="airbaltic"> - Air Baltic Corporation A/S</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="pegasus"
+            name="pegasus"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.pegasus}
+          />
+          <label for="pegasus"> - Pegasus Hava Tasimaciligi A.S.</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="brussels"
+            name="brussels"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.brussels}
+          />
+          <label for="brussels"> - Brussels Airlines</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="alitalia"
+            name="alitalia"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.alitalia}
+          />
+          <label for="alitalia"> - Alitalia Societa Aerea Italiana</label>
+        </div>{' '}
+        <div className="input-group">
+          {' '}
+          <input
+            type="checkbox"
+            id="polish"
+            name="polish"
+            onChange={(e) => handleAirlinesFilterChange(e)}
+            checked={airlinesFilterState.polish}
+          />
+          <label for="polish"> - LOT Polish Airlines</label>
         </div>
       </div>
       {/* Airline filters */}
