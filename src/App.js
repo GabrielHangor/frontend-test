@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Flights from './Components/Flights';
 import Form from './Components/Form';
-import data from './flights.json';
 
 function App() {
-  const [flightsData, setFlightsData] = useState();
-  const [filteredData, setFilteredData] = useState();
-  const [radioInputValue, setRadioInputValue] = useState('ascending');
+  const [data, setData] = useState();
+  const [radioInputValue, setRadioInputValue] = useState();
   const [priceInputValue, setPriceInputValue] = useState({
     from: 0,
     till: 10000,
   });
   const [airlinesFilterState, setAirlinesFilterState] = useState({});
   const [transferFilterState, setTransferFilterState] = useState({});
+
+  useEffect(() => {
+    const fetchedData = require('./flights.json');
+    setData(fetchedData.result.flights);
+  }, []);
 
   const returnSortedDataByPriceAndTime = (flights) => {
     if (radioInputValue === 'ascending') {
@@ -41,19 +44,6 @@ function App() {
   // ];
 
   // console.log(uniqueCarriers);
-
-  useEffect(() => {
-    setFlightsData(data.result.flights);
-  }, []);
-
-  // console.log(data.result.flights);
-
-  useEffect(() => {
-    let tempData = null;
-    if (flightsData) tempData = returnSortedDataByPriceAndTime(flightsData);
-
-    setFilteredData(tempData);
-  }, [radioInputValue]);
 
   const handleRadioInputChange = (e) => setRadioInputValue(e.target.value);
 
@@ -91,7 +81,11 @@ function App() {
         handleTransferFilterChange={handleTransferFilterChange}
         transferFilterState={transferFilterState}
       />
-      <Flights flightsData={filteredData} />
+      <Flights
+        flightsData={data}
+        returnSortedDataByPriceAndTime={returnSortedDataByPriceAndTime}
+        radioInputValue={radioInputValue}
+      />
     </div>
   );
 }

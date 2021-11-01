@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Flight from './Flight';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
-function Flights({ flightsData }) {
+function Flights({
+  flightsData,
+  returnSortedDataByPriceAndTime,
+  radioInputValue,
+}) {
+  const [filteredData, setFilteredData] = useState();
+
+  useEffect(() => {
+    setFilteredData(flightsData);
+  }, [flightsData]);
+
+  useEffect(() => {
+    setFilteredData(returnSortedDataByPriceAndTime(flightsData));
+  }, [radioInputValue]);
+
   return (
     <div className="flights-container">
-      {flightsData &&
-        flightsData.map((el, index) => {
+      {filteredData &&
+        filteredData.map((el, index) => {
           return (
             <Flight
               key={index}
